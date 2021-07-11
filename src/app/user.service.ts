@@ -13,6 +13,7 @@ export class UserService {
   apiUrl: string = 'http://localhost:3000/user';
   private isAuthenticated = false;
   private authStatusListner = new Subject<boolean>();
+  private authInfoListner = new Subject<boolean>();
   constructor(private http: HttpClient, private router: Router) { }
 
   getDevelopers() {
@@ -36,6 +37,7 @@ export class UserService {
         localStorage.setItem('USER', JSON.stringify(res.user));
         this.isAuthenticated = true;
         this.authStatusListner.next(true);
+        this.authInfoListner.next(res.user);
         this.router.navigate(['/']);
       }),
         catchError(this.handleError('login Developer', []))
@@ -45,6 +47,10 @@ export class UserService {
   getAuthStatusListener() {
     return this.authStatusListner.asObservable();
   }
+  getAuthDetailInfo() {
+    return this.authInfoListner.asObservable();
+  }
+
 
   logout() {
     this.isAuthenticated = false;
@@ -56,7 +62,6 @@ export class UserService {
 
   autoAuthUser() {
     const authInforamtion = this.getAuthData();
-    console.log(authInforamtion)
     if (!authInforamtion) return;
     this.isAuthenticated = true;
     this.authStatusListner.next(true);
