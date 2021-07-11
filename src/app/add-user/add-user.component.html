@@ -1,0 +1,13 @@
+<div class="add-dev p-3 card w-50">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="name" class="form-control" id="name" formControlName="name" placeholder="developer">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="email" formControlName="email" placeholder="test@test.com">
+    </div>
+    <button class="w-100 btn btn-dark" type="submit" [disabled]="!userForm.valid">Submit</button>
+  </form>
+</div>

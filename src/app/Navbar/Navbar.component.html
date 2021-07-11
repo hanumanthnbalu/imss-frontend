@@ -1,0 +1,15 @@
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-dark" role="banner">
+  <h4 routerLink="/" class="m-0 text-white px-4">IMSS</h4>
+  <div class=" spacer"></div>
+  <div class="px-4">
+    <ul>
+      <li *ngIf="userIsAuthenticated"><a routerLink="/" routerLinkActive="active">Developers</a></li>
+      <li *ngIf="userIsAuthenticated && userInfo.role === 'ADMIN'"><a routerLink="/add-developer"
+          routerLinkActive="active">Add Developer</a></li>
+      <li *ngIf="userIsAuthenticated"><button class="btn btn-light" (click)="logout()">Logout</button></li>
+      <l *ngIf="!userIsAuthenticated"><button class="btn btn-light" routerLink="/login"
+          routerLinkActive="active">Login</button></l>
+    </ul>
+  </div>
+</nav>
