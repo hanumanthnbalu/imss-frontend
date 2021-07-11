@@ -98,7 +98,7 @@ export class UserService {
 
   private handleError(operation = 'operation', result) {
     return (error: any) => {
-      alert(error.error.message);
+      console.log(error.error.message);
       return of(result);
     };
   }
